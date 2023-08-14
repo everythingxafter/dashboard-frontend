@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 
 function SideNavbar() {
     return (
@@ -7,29 +8,29 @@ function SideNavbar() {
             </div>
             <div className='flex flex-col gap-4'>
                 <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                    <p>Home</p>
+                    <Link to='/'>Home</Link>
                 </div>
                 <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                    <p>Kalkulator Harga</p>
+                    <Link to='/calculator'>Kalkulator Harga</Link>
                 </div>
                 <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                    <p>Pusat Akun</p>
+                    <Link to='/accountcenter'>Pusat Akun</Link>
                 </div>
                 <div className='flex flex-col gap-2 my-2'>
                     <div className='py-2 px-4 text-center border-b-2 border-b-slate-400'>
                         <p>List</p>
                     </div>
                     <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                        <p>Customer</p>
+                        <Link to='/listcustomer'>Customer</Link>
                     </div>
                     <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                        <p>Gudang</p>
+                        <Link to='/listgudang'>Gudang</Link>
                     </div>
                     <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                        <p>Kebun</p>
+                        <Link to='/listkebun'>Kebun</Link>
                     </div>
                     <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                        <p>Supplier</p>
+                        <Link to='/listsupplier'>Supplier</Link>
                     </div>
                 </div>
                 <div className='flex flex-col gap-2 my-2'>
@@ -37,16 +38,16 @@ function SideNavbar() {
                         <p>Tambah</p>
                     </div>
                     <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                        <p>Customer</p>
+                        <Link to='/tambahcustomer'>Customer</Link>
                     </div>
                     <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                        <p>Gudang</p>
+                        <Link to='/tambahgudang'>Gudang</Link>
                     </div>
                     <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                        <p>Kebun</p>
+                        <Link to='/tambahkebun'>Kebun</Link>
                     </div>
                     <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                        <p>Supplier</p>
+                        <Link to='/tambahsupplier'>Supplier</Link>
                     </div>
                 </div>
             </div>
