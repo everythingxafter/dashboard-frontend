@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Table, { SelectColumnFilter, LocateCell } from "../components/Table"
+import Table, { SelectColumnFilter } from "../components/Table"
 
 function ListCustomer() {
     const getData = () => [
@@ -86,7 +86,7 @@ function ListCustomer() {
             {
                 Header: "Locate",
                 accessor: "locate",
-                Cell: LocateCell,
+                // Cell: LocateCell,
                 posAccessor: "posCoords"
             },
             {

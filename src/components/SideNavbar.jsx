@@ -20,8 +20,10 @@ function SideNavbar() {
                     <div className='py-2 px-4 text-center border-b-2 border-b-slate-400'>
                         <p>List</p>
                     </div>
-                    <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                        <Link to='/listcustomer'>Customer</Link>
+                    <div >
+                        <Link
+                            className='py-2 px-4 block rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'
+                            to='/listcustomer'>Customer</Link>
                     </div>
                     <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
                         <Link to='/listgudang'>Gudang</Link>
@@ -40,8 +42,8 @@ function SideNavbar() {
                     <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
                         <Link to='/tambahcustomer'>Customer</Link>
                     </div>
-                    <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
-                        <Link to='/tambahgudang'>Gudang</Link>
+                    <div className=' rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
+                        <Link className='py-2 px-4' to='/tambahgudang'>Gudang</Link>
                     </div>
                     <div className='py-2 px-4 rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'>
                         <Link to='/tambahkebun'>Kebun</Link>
