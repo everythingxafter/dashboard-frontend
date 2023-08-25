@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
     useTable,
     useGlobalFilter,
@@ -44,6 +44,36 @@ function GlobalFilter({
             />
         </label>
     );
+}
+
+function DebouncedInput({
+    value: initialValue,
+    onChange,
+    debounce = 500,
+    ...props
+}) {
+    const [value, setValue] = useState(initialValue);
+
+    useEffect(() => {
+        setValue(initialValue);
+    }, [initialValue]);
+
+    const handleChange = useCallback((newValue) => {
+        onChange(newValue);
+    }, [onChange]);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            handleChange(value);
+        }, debounce);
+
+        return () => clearTimeout(timeout);
+    }, [value, debounce, handleChange]);
+
+    return (
+        <input {...props} value={value} onChange={e => setValue(e.target.value)} />
+    );
+
 }
 
 // This is a custom filter UI for selecting
@@ -104,8 +134,7 @@ function Table({ columns, data }) {
         previousPage,
         setPageSize,
         state,
-        preGlobalFilteredRows,
-        setGlobalFilter
+        setGlobalFilter,
     } = useTable(
         {
             columns,
@@ -114,7 +143,7 @@ function Table({ columns, data }) {
         useFilters,
         useGlobalFilter,
         useSortBy,
-        usePagination
+        usePagination,
     );
 
     // Render the UI for your table
@@ -130,42 +159,52 @@ function Table({ columns, data }) {
             <div className="mt-2 flex flex-col">
                 <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
                     <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        {/* <div className="flex my-3 w-full">
+                            <DebouncedInput
+                                value={globalFilter ?? ''}
+                                onChange={value => setGlobalFilter(String(value))}
+                                className="p-2 font-lg shadow border border-block rounded-md"
+                                placeholder="Search all data..."
+                            />
+                        </div> */}
                         <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                             <table
                                 {...getTableProps()}
                                 className="min-w-full divide-y divide-gray-200"
                             >
                                 <thead className="bg-gray-50">
-                                    {headerGroups.map((headerGroup) => (
-                                        <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup}>
-                                            {headerGroup.headers.map((column) => (
-                                                // Add the sorting props to control sorting. For this example
-                                                // we can add them into the header props
-                                                <th
-                                                    scope="col"
-                                                    className="group px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                    {...column.getHeaderProps(
-                                                        column.getSortByToggleProps()
-                                                    )}
-                                                    key={column}
-                                                >
-                                                    <div className="flex items-center justify-between">
-                                                        {column.render("Header")}
-                                                        {/* Add a sort direction indicator */}
-                                                        <span>
-                                                            {column.isSorted ? (
-                                                                column.isSortedDesc ? (
-                                                                    <SortDownIcon className="w-4 h-4 text-gray-400" />
+                                    {headerGroups.map((headerGroup, i) => (
+                                        <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id} >
+                                            {
+                                                headerGroup.headers.map((column) => (
+                                                    // Add the sorting props to control sorting. For this example
+                                                    // we can add them into the header props
+                                                    <th
+                                                        scope="col"
+                                                        className="group px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                        {...column.getHeaderProps(
+                                                            column.getSortByToggleProps()
+                                                        )}
+                                                        key={column.id}
+                                                    >
+                                                        <div className="flex items-center justify-between">
+                                                            {column.render("Header")}
+                                                            {/* Add a sort direction indicator */}
+                                                            <span>
+                                                                {column.isSorted ? (
+                                                                    column.isSortedDesc ? (
+                                                                        <SortDownIcon className="w-4 h-4 text-gray-400" />
+                                                                    ) : (
+                                                                        <SortUpIcon className="w-4 h-4 text-gray-400" />
+                                                                    )
                                                                 ) : (
-                                                                    <SortUpIcon className="w-4 h-4 text-gray-400" />
-                                                                )
-                                                            ) : (
-                                                                <SortIcon className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100" />
-                                                            )}
-                                                        </span>
-                                                    </div>
-                                                </th>
-                                            ))}
+                                                                    <SortIcon className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100" />
+                                                                )}
+                                                            </span>
+                                                        </div>
+                                                    </th>
+                                                ))
+                                            }
                                         </tr>
                                     ))}
                                 </thead>
@@ -177,13 +216,13 @@ function Table({ columns, data }) {
                                         // new
                                         prepareRow(row);
                                         return (
-                                            <tr {...row.getRowProps()} key={row}>
+                                            <tr {...row.getRowProps()} key={i}>
                                                 {row.cells.map((cell) => {
                                                     return (
                                                         <td
                                                             {...cell.getCellProps()}
                                                             className="px-6 py-4 whitespace-nowrap"
-                                                            key={cell}
+                                                            key={i}
                                                         >
                                                             {cell.render("Cell")}
                                                         </td>
@@ -197,7 +236,7 @@ function Table({ columns, data }) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
             <div className="py-3 flex items-center justify-between">
                 <div className="flex-1 flex justify-between sm:hidden">
                     <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
