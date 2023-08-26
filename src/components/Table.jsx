@@ -46,7 +46,7 @@ function GlobalFilter({
     );
 }
 
-function DebouncedInput({
+export function DebouncedInput({
     value: initialValue,
     onChange,
     debounce = 500,
@@ -152,29 +152,29 @@ function Table({ columns, data }) {
             {headerGroups.map((headerGroup) =>
                 headerGroup.headers.map((column) =>
                     column.Filter ? (
-                        <div key={column.id}>{column.render("Filter")}</div>
+                        <div key={column}>{column.render("Filter")}</div>
                     ) : null
                 )
             )}
             <div className="mt-2 flex flex-col">
                 <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
                     <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        {/* <div className="flex my-3 w-full">
+                        <div className="flex my-3 w-full">
                             <DebouncedInput
-                                value={globalFilter ?? ''}
+                                value={state.globalFilter ?? ''}
                                 onChange={value => setGlobalFilter(String(value))}
                                 className="p-2 font-lg shadow border border-block rounded-md"
                                 placeholder="Search all data..."
                             />
-                        </div> */}
+                        </div>
                         <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                             <table
                                 {...getTableProps()}
                                 className="min-w-full divide-y divide-gray-200"
                             >
                                 <thead className="bg-gray-50">
-                                    {headerGroups.map((headerGroup, i) => (
-                                        <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id} >
+                                    {headerGroups.map((headerGroup) => (
+                                        <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.name} >
                                             {
                                                 headerGroup.headers.map((column) => (
                                                     // Add the sorting props to control sorting. For this example
@@ -185,7 +185,7 @@ function Table({ columns, data }) {
                                                         {...column.getHeaderProps(
                                                             column.getSortByToggleProps()
                                                         )}
-                                                        key={column.id}
+                                                        key={column.name}
                                                     >
                                                         <div className="flex items-center justify-between">
                                                             {column.render("Header")}

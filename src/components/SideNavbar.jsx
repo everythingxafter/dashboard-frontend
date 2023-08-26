@@ -34,7 +34,7 @@ function SideNavbar() {
                     <div>
                         <Link
                             className='py-2 px-4 block rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'
-                            to='/listgudang'>Gudang</Link>
+                            to='/listsupplier'>Supplier</Link>
                     </div>
                     <div>
                         <Link
@@ -44,7 +44,7 @@ function SideNavbar() {
                     <div>
                         <Link
                             className='py-2 px-4 block rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'
-                            to='/listsupplier'>Supplier</Link>
+                            to='/listgudang'>Gudang</Link>
                     </div>
                 </div>
                 <div className='flex flex-col gap-2 my-2'>
@@ -59,7 +59,7 @@ function SideNavbar() {
                     <div>
                         <Link
                             className='py-2 px-4 block rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'
-                            to='/tambahgudang'>Gudang</Link>
+                            to='/tambahsupplier'>Supplier</Link>
                     </div>
                     <div>
                         <Link
@@ -69,7 +69,7 @@ function SideNavbar() {
                     <div>
                         <Link
                             className='py-2 px-4 block rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'
-                            to='/tambahsupplier'>Supplier</Link>
+                            to='/tambahgudang'>Gudang</Link>
                     </div>
                 </div>
             </div>
