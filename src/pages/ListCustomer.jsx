@@ -6,7 +6,7 @@ import ReactModal from 'react-modal';
 function ListCustomer() {
     const getData = () => [
         {
-            id: '1',
+            id: 11,
             customerName: "PT. Maju Jaya",
             name: 'PT. Sukajadi Sawit Mekar',
             estate: 'SEBABI',
@@ -19,7 +19,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '2',
+            id: 12,
             customerName: "PT. Koloni Radja",
             name: 'PT. Sukajadi Sawit Mekar',
             estate: 'SERANAU',
@@ -32,7 +32,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '3',
+            id: 13,
             customerName: "PT. Visi Misi Djaya",
             name: 'PT. Sukajadi Sawit Mekar',
             estate: 'BUKIT LIMAS',
@@ -45,7 +45,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '4',
+            id: 14,
             customerName: "PT. Murah Meriah",
             name: 'PT. Sukajadi Sawit Mekar',
             estate: 'BUKIT LINANG',
@@ -58,7 +58,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '5',
+            id: 15,
             customerName: "PT. Selangkah Kedepan",
             name: 'PT. Maju Aneka Sawi',
             estate: 'TANAH MAS',
@@ -71,7 +71,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '6',
+            id: 16,
             customerName: "PT. Jaya Makmur",
             name: 'PT. Maju Aneka Sawi',
             estate: 'SARIMAS.1',
@@ -84,7 +84,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '7',
+            id: 17,
             customerName: "PT. Sukses Makmur",
             name: 'PT. Maju Aneka Sawi',
             estate: 'SARIMAS.2',
@@ -97,7 +97,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '8',
+            id: 18,
             customerName: "PT. Inti Sukses",
             name: 'PT. Maju Aneka Sawi',
             estate: 'Bakung mas',
@@ -110,7 +110,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '9',
+            id: 19,
             customerName: "PT. San Marino",
             name: 'PT. Globalindo Alam Perkasa',
             estate: 'ALAM SAHARA',
@@ -123,7 +123,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '10',
+            id: 110,
             customerName: "PT. Jaya Abadi",
             name: 'PT. Globalindo Alam Perkasa',
             estate: 'ALAM SUTERA',
@@ -136,7 +136,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '11',
+            id: 111,
             customerName: "PT. Kasil Terus",
             name: 'PT. Globalindo Alam Perkasa',
             estate: 'ALAM GHOIB',
@@ -149,7 +149,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '12',
+            id: 112,
             customerName: "PT. Sukses Terus",
             name: 'PT. Globalindo Alam Perkasa',
             estate: 'SERUSA',
@@ -162,7 +162,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '13',
+            id: 113,
             customerName: "PT. Surya Jelita",
             name: 'PT. Sukajadi Sawit Mekar',
             estate: 'SEBABI',
@@ -175,7 +175,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '14',
+            id: 114,
             customerName: "PT. Gudang Garam",
             name: 'PT. Sukajadi Sawit Mekar',
             estate: 'SEBABI',
@@ -188,7 +188,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '15',
+            id: 115,
             customerName: "PT. Kucing Manja",
             name: 'PT. Sukajadi Sawit Mekar',
             estate: 'SEBABI',
@@ -201,7 +201,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '16',
+            id: 116,
             customerName: "PT. Kucing Nakal",
             name: 'PT. Sukajadi Sawit Mekar',
             estate: 'SEBABI',
@@ -214,7 +214,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '17',
+            id: 117,
             customerName: "PT. Sukses Selalu",
             name: 'PT. Sukajadi Sawit Mekar',
             estate: 'SEBABI',
@@ -227,7 +227,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '18',
+            id: 118,
             customerName: "PT. Maju Mundur",
             name: 'PT. Sukajadi Sawit Mekar',
             estate: 'SEBABI',
@@ -240,7 +240,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '19',
+            id: 119,
             customerName: "PT. Harapan Ayah",
             name: 'PT. Sukajadi Sawit Mekar',
             estate: 'SEBABI',
@@ -253,7 +253,7 @@ function ListCustomer() {
             keterangan: '-',
         },
         {
-            id: '20',
+            id: 120,
             customerName: "PT. Harapan Ibu",
             name: 'PT. Sukajadi Sawit Mekar',
             estate: 'SEBABI',
@@ -336,6 +336,7 @@ function ListCustomer() {
             {
                 Header: "Price / Ton",
                 accessor: "price",
+                 // eslint-disable-next-line react/prop-types
                 Cell: ({ value }) => (
                     <span>{`Rp. ${value.toLocaleString('id-ID')},-`}</span>
                 ),
@@ -361,15 +362,22 @@ function ListCustomer() {
             {
                 Header: "Action",
                 accessor: "id", // You can use any unique identifier here
+                // eslint-disable-next-line react/prop-types
                 Cell: ({ row }) => (
                     <div className="flex gap-2">
                         <button
+                            // eslint-disable-next-line react/prop-types
+                            key={`edit_${row.id}`}
+                            // eslint-disable-next-line react/prop-types
                             onClick={() => handleEdit(row.original.id)} // Implement your edit logic here
                             className="text-indigo-600 hover:text-indigo-800 focus:outline-none"
                         >
                             <PencilIcon className="w-5 h-5" />
                         </button>
                         <button
+                             // eslint-disable-next-line react/prop-types
+                            key={`delete_${row.id}`}
+                             // eslint-disable-next-line react/prop-types
                             onClick={() => handleDelete(row.original.id)} // Implement your delete logic here
                             className="text-red-600 hover:text-red-800 focus:outline-none"
                         >

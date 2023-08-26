@@ -150,9 +150,9 @@ function Table({ columns, data }) {
     return (
         <>
             {headerGroups.map((headerGroup) =>
-                headerGroup.headers.map((column) =>
+                headerGroup.headers.map((column, index) =>
                     column.Filter ? (
-                        <div key={column}>{column.render("Filter")}</div>
+                        <div key={index}>{column.render("Filter")}</div>
                     ) : null
                 )
             )}
@@ -173,8 +173,8 @@ function Table({ columns, data }) {
                                 className="min-w-full divide-y divide-gray-200"
                             >
                                 <thead className="bg-gray-50">
-                                    {headerGroups.map((headerGroup) => (
-                                        <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.name} >
+                                    {headerGroups.map((headerGroup, index) => (
+                                        <tr {...headerGroup.getHeaderGroupProps()} key={index} >
                                             {
                                                 headerGroup.headers.map((column) => (
                                                     // Add the sorting props to control sorting. For this example
@@ -185,7 +185,7 @@ function Table({ columns, data }) {
                                                         {...column.getHeaderProps(
                                                             column.getSortByToggleProps()
                                                         )}
-                                                        key={column.name}
+                                                        key={column.id}
                                                     >
                                                         <div className="flex items-center justify-between">
                                                             {column.render("Header")}
@@ -217,12 +217,12 @@ function Table({ columns, data }) {
                                         prepareRow(row);
                                         return (
                                             <tr {...row.getRowProps()} key={i}>
-                                                {row.cells.map((cell) => {
+                                                {row.cells.map((cell,index) => {
                                                     return (
                                                         <td
                                                             {...cell.getCellProps()}
                                                             className="px-6 py-4 whitespace-nowrap"
-                                                            key={i}
+                                                            key={index}
                                                         >
                                                             {cell.render("Cell")}
                                                         </td>
@@ -261,8 +261,8 @@ function Table({ columns, data }) {
                                     setPageSize(Number(e.target.value));
                                 }}
                             >
-                                {[5, 10, 20].map((pageSize) => (
-                                    <option key={pageSize} value={pageSize}>
+                                {[5, 10, 20].map((pageSize, index) => (
+                                    <option key={index} value={pageSize}>
                                         Show {pageSize}
                                     </option>
                                 ))}
@@ -338,6 +338,12 @@ Table.propTypes = {
         })
     ).isRequired,
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+DebouncedInput.propTypes = {
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    debounce: PropTypes.number,
 };
 
 
