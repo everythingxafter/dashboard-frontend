@@ -1,234 +1,24 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import Table, { SelectColumnFilter } from "../components/Table"
 import { PencilIcon, TrashIcon } from "@heroicons/react/solid";
 import ReactModal from 'react-modal';
+import axios from "axios";
 
 function ListSupplier() {
-    const getData = () => [
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-        {
-            "id": 11,
-            "supplierName": "PT. Maju Jaya",
-            "supplierService": "PBM Bongkar",
-            "destination1": "SURYA 3 Estate",
-            "price": 260000,
-            "keterangan": "Harga sudah termasuk jetty",
-            "createDate": "21 February 2023",
-            "editedAt": "21 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 12,
-            "supplierName": "PT. Lancar Jaya",
-            "supplierService": "PBM Muat",
-            "destination1": "MILL 2 Estate",
-            "price": 210000,
-            "keterangan": "All in trucking + buruh",
-            "createDate": "21 February 2023",
-            "editedAt": "21 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 13,
-            "supplierName": "CV. Semua Bisa",
-            "supplierService": "Trucking",
-            "destination1": "Gresik - Kelampai",
-            "price": 340000,
-            "keterangan": "OA Kapal + buruh",
-            "createDate": "21 February 2023",
-            "editedAt": "21 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 14,
-            "supplierName": "PT. Perahu layar",
-            "supplierService": "Kapal",
-            "destination1": "Gudang Makmur",
-            "price": 270000,
-            "keterangan": "Harga sudah termasuk jetty",
-            "createDate": "21 February 2023",
-            "editedAt": "21 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 15,
-            "supplierName": "CV. Cepat",
-            "supplierService": "Trucking",
-            "destination1": "Cikarang Distribution Center",
-            "price": 180000,
-            "keterangan": "All in trucking + buruh",
-            "createDate": "22 February 2023",
-            "editedAt": "22 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 16,
-            "supplierName": "PT. Jasa Lengkap",
-            "supplierService": "PBM Bongkar",
-            "destination1": "JABABEKA 9 Harbor",
-            "price": 310000,
-            "keterangan": "OA Kapal + buruh",
-            "createDate": "22 February 2023",
-            "editedAt": "22 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 17,
-            "supplierName": "PT. Angkasa Indah",
-            "supplierService": "PBM Muat",
-            "destination1": "Mitra Karawang Terminal",
-            "price": 230000,
-            "keterangan": "Harga sudah termasuk jetty",
-            "createDate": "22 February 2023",
-            "editedAt": "22 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 18,
-            "supplierName": "PT. Logistik Makmur",
-            "supplierService": "Kapal",
-            "destination1": "Tanjung Priok Port",
-            "price": 350000,
-            "keterangan": "All in trucking + buruh",
-            "createDate": "23 February 2023",
-            "editedAt": "23 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 19,
-            "supplierName": "CV. Penta",
-            "supplierService": "Trucking",
-            "destination1": "Cirebon Wharf",
-            "price": 250000,
-            "keterangan": "OA Kapal + buruh",
-            "createDate": "23 February 2023",
-            "editedAt": "23 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 20,
-            "supplierName": "PT. Lautan Jasa",
-            "supplierService": "Kapal",
-            "destination1": "Makassar Harbor",
-            "price": 290000,
-            "keterangan": "Harga sudah termasuk jetty",
-            "createDate": "23 February 2023",
-            "editedAt": "23 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 21,
-            "supplierName": "CV. Prima Cepat",
-            "supplierService": "Trucking",
-            "destination1": "Surabaya Distribution Center",
-            "price": 200000,
-            "keterangan": "All in trucking + buruh",
-            "createDate": "24 February 2023",
-            "editedAt": "24 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 22,
-            "supplierName": "PT. Mega Logistik",
-            "supplierService": "PBM Bongkar",
-            "destination1": "JAKARTA 10 Harbor",
-            "price": 280000,
-            "keterangan": "OA Kapal + buruh",
-            "createDate": "24 February 2023",
-            "editedAt": "24 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 23,
-            "supplierName": "PT. Terang Abadi",
-            "supplierService": "PBM Muat",
-            "destination1": "KIMA Industrial Estate",
-            "price": 220000,
-            "keterangan": "Harga sudah termasuk jetty",
-            "createDate": "24 February 2023",
-            "editedAt": "24 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 24,
-            "supplierName": "CV. Logistik Cepat",
-            "supplierService": "Trucking",
-            "destination1": "Pati Logistics Hub",
-            "price": 190000,
-            "keterangan": "All in trucking + buruh",
-            "createDate": "25 February 2023",
-            "editedAt": "25 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 25,
-            "supplierName": "PT. Cahaya Laut",
-            "supplierService": "Kapal",
-            "destination1": "Bitung Port",
-            "price": 320000,
-            "keterangan": "OA Kapal + buruh",
-            "createDate": "25 February 2023",
-            "editedAt": "25 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 26,
-            "supplierName": "PT. Berkah Abadi",
-            "supplierService": "PBM Bongkar",
-            "destination1": "Cirebon Wharf",
-            "price": 260000,
-            "keterangan": "Harga sudah termasuk jetty",
-            "createDate": "25 February 2023",
-            "editedAt": "25 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 27,
-            "supplierName": "CV. Sejatera",
-            "supplierService": "Trucking",
-            "destination1": "Mitra Karawang Terminal",
-            "price": 230000,
-            "keterangan": "All in trucking + buruh",
-            "createDate": "26 February 2023",
-            "editedAt": "26 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 28,
-            "supplierName": "PT. Samudra Logistik",
-            "supplierService": "Kapal",
-            "destination1": "JAKARTA 10 Harbor",
-            "price": 300000,
-            "keterangan": "OA Kapal + buruh",
-            "createDate": "26 February 2023",
-            "editedAt": "26 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 29,
-            "supplierName": "CV. Nusantara",
-            "supplierService": "Trucking",
-            "destination1": "SURYA 3 Estate",
-            "price": 210000,
-            "keterangan": "Harga sudah termasuk jetty",
-            "createDate": "26 February 2023",
-            "editedAt": "26 February 2023",
-            "createBy": "Maya"
-        },
-        {
-            "id": 30,
-            "supplierName": "PT. Pelita Jaya",
-            "supplierService": "PBM Muat",
-            "destination1": "JABABEKA 9 Harbor",
-            "price": 280000,
-            "keterangan": "All in trucking + buruh",
-            "createDate": "27 February 2023",
-            "editedAt": "27 February 2023",
-            "createBy": "Maya"
-        }
-    ];
-
-    const data = React.useMemo(() => getData(), []);
+    useEffect(() => {
+        axios.get('/mockupData/supplierData.json') // Replace with the actual path to your JSON file
+            .then(response => {
+                setData(response.data);
+                setIsLoading(false);
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+                setIsLoading(false);
+            });
+    }, []);
 
     const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
@@ -289,7 +79,7 @@ function ListSupplier() {
             },
             {
                 Header: "Alamat Tujuan",
-                accessor: "destination1"
+                accessor: "destination"
             },
             {
                 Header: "Harga Service",
@@ -352,7 +142,11 @@ function ListSupplier() {
                 <div className="text-center">
                     <h1 className="text-xl my-3">List Supplier</h1>
                 </div>
-                <Table columns={columns} data={data} handleEdit={handleEdit} handleDelete={handleDelete} />
+                {isLoading ? (
+                    <p>Loading...</p>
+                ) : (
+                    <Table columns={columns} data={data} handleEdit={handleEdit} handleDelete={handleDelete} />
+                )}
                 <ReactModal
                     isOpen={isEditModalOpen}
                     onRequestClose={closeEditModal}

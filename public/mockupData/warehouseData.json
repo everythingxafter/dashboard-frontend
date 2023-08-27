@@ -1,0 +1,222 @@
+[
+  {
+    "id": 11,
+    "warehouseName": "Gudang Simpan",
+    "factoryName": "PT. Pupuk Berkah",
+    "warehouseAddress": "JL. Roomo No. 378, RT 001 RW 001, Ds. Roomo, Mayar, Gresik",
+    "contactPersonName": "Ibu Lucy",
+    "contactPersonNumber": "081312344322",
+    "createDate": "21 February 2023",
+    "editedAt": "21 February 2023",
+    "createBy": "Maya"
+  },
+  {
+    "id": 12,
+    "warehouseName": "Gudang Suka Jaya",
+    "factoryName": "PT. Indah Sejahtera",
+    "warehouseAddress": "JL. Harapan No. 123, RT 002 RW 002, Ds. Harapan, Makmur, Surabaya",
+    "contactPersonName": "Pak Suka",
+    "contactPersonNumber": "089567125542",
+    "createDate": "21 February 2023",
+    "editedAt": "21 February 2023",
+    "createBy": "Iqbal"
+  },
+  {
+    "id": 13,
+    "warehouseName": "Gudang Terang",
+    "factoryName": "PT. Cahaya Makmur",
+    "warehouseAddress": "JL. Terang No. 45, RT 003 RW 001, Ds. Terang, Bahagia, Malang",
+    "contactPersonName": "Pak Cahyo",
+    "contactPersonNumber": "082276119732",
+    "createDate": "21 February 2023",
+    "editedAt": "21 February 2023",
+    "createBy": "Ahmad"
+  },
+  {
+    "id": 14,
+    "warehouseName": "Gudang Emas",
+    "factoryName": "PT. Emas Gemilang",
+    "warehouseAddress": "JL. Emas No. 89, RT 001 RW 002, Ds. Emas, Makmur, Jakarta",
+    "contactPersonName": "Ibu Gemilang",
+    "contactPersonNumber": "082256582122",
+    "createDate": "21 February 2023",
+    "editedAt": "21 February 2023",
+    "createBy": "Iqbal"
+  },
+  {
+    "id": 15,
+    "warehouseName": "Gudang Bina",
+    "factoryName": "PT. Bina Bersama",
+    "warehouseAddress": "JL. Bina No. 10, RT 002 RW 001, Ds. Bina, Sejahtera, Bandung",
+    "contactPersonName": "Pak Bina",
+    "contactPersonNumber": "085721134567",
+    "createDate": "22 February 2023",
+    "editedAt": "22 February 2023",
+    "createBy": "Maya"
+  },
+  {
+    "id": 16,
+    "warehouseName": "Gudang Mutiara",
+    "factoryName": "PT. Permata Sari",
+    "warehouseAddress": "JL. Permata No. 5, RT 001 RW 003, Ds. Permata, Harmoni, Medan",
+    "contactPersonName": "Ibu Sari",
+    "contactPersonNumber": "081234567890",
+    "createDate": "22 February 2023",
+    "editedAt": "22 February 2023",
+    "createBy": "Ahmad"
+  },
+  {
+    "id": 17,
+    "warehouseName": "Gudang Sinar",
+    "factoryName": "PT. Sinar Jaya",
+    "warehouseAddress": "JL. Sinar No. 25, RT 003 RW 001, Ds. Sinar, Sejahtera, Surabaya",
+    "contactPersonName": "Pak Sinar",
+    "contactPersonNumber": "087612345678",
+    "createDate": "22 February 2023",
+    "editedAt": "22 February 2023",
+    "createBy": "Maya"
+  },
+  {
+    "id": 18,
+    "warehouseName": "Gudang Berseri",
+    "factoryName": "PT. Berseri Makmur",
+    "warehouseAddress": "JL. Berseri No. 15, RT 001 RW 002, Ds. Berseri, Bersatu, Yogyakarta",
+    "contactPersonName": "Pak Berseri",
+    "contactPersonNumber": "089876543210",
+    "createDate": "23 February 2023",
+    "editedAt": "23 February 2023",
+    "createBy": "Iqbal"
+  },
+  {
+    "id": 19,
+    "warehouseName": "Gudang Kemuning",
+    "factoryName": "PT. Kemuning Harmoni",
+    "warehouseAddress": "JL. Kemuning No. 30, RT 002 RW 001, Ds. Kemuning, Harmoni, Bandung",
+    "contactPersonName": "Ibu Harmoni",
+    "contactPersonNumber": "081234567890",
+    "createDate": "23 February 2023",
+    "editedAt": "23 February 2023",
+    "createBy": "Ahmad"
+  },
+  {
+    "id": 20,
+    "warehouseName": "Gudang Berjaya",
+    "factoryName": "PT. Berjaya Makmur",
+    "warehouseAddress": "JL. Berjaya No. 8, RT 001 RW 001, Ds. Berjaya, Sejahtera, Jakarta",
+    "contactPersonName": "Pak Makmur",
+    "contactPersonNumber": "087654321098",
+    "createDate": "23 February 2023",
+    "editedAt": "23 February 2023",
+    "createBy": "Maya"
+  },
+  {
+    "id": 21,
+    "warehouseName": "Gudang Surya",
+    "factoryName": "PT. Surya Abadi",
+    "warehouseAddress": "JL. Surya No. 18, RT 001 RW 002, Ds. Surya, Abadi, Surabaya",
+    "contactPersonName": "Pak Abadi",
+    "contactPersonNumber": "081298765432",
+    "createDate": "24 February 2023",
+    "editedAt": "24 February 2023",
+    "createBy": "Iqbal"
+  },
+  {
+    "id": 22,
+    "warehouseName": "Gudang Hijau",
+    "factoryName": "PT. Hijau Makmur",
+    "warehouseAddress": "JL. Hijau No. 21, RT 002 RW 001, Ds. Hijau, Makmur, Medan",
+    "contactPersonName": "Pak Hijau",
+    "contactPersonNumber": "089765432109",
+    "createDate": "24 February 2023",
+    "editedAt": "24 February 2023",
+    "createBy": "Maya"
+  },
+  {
+    "id": 23,
+    "warehouseName": "Gudang Pertiwi",
+    "factoryName": "PT. Pertiwi Sejahtera",
+    "warehouseAddress": "JL. Pertiwi No. 28, RT 001 RW 003, Ds. Pertiwi, Sejahtera, Bandung",
+    "contactPersonName": "Ibu Pertiwi",
+    "contactPersonNumber": "082187654321",
+    "createDate": "24 February 2023",
+    "editedAt": "24 February 2023",
+    "createBy": "Ahmad"
+  },
+  {
+    "id": 24,
+    "warehouseName": "Gudang Sukajaya",
+    "factoryName": "PT. Sukajaya Harmoni",
+    "warehouseAddress": "JL. Sukajaya No. 35, RT 002 RW 001, Ds. Sukajaya, Harmoni, Surabaya",
+    "contactPersonName": "Pak Sukajaya",
+    "contactPersonNumber": "087856432109",
+    "createDate": "25 February 2023",
+    "editedAt": "25 February 2023",
+    "createBy": "Iqbal"
+  },
+  {
+    "id": 25,
+    "warehouseName": "Gudang Alam",
+    "factoryName": "PT. Alam Sejahtera",
+    "warehouseAddress": "JL. Alam No. 12, RT 001 RW 002, Ds. Alam, Sejahtera, Jakarta",
+    "contactPersonName": "Pak Alam",
+    "contactPersonNumber": "081256789012",
+    "createDate": "25 February 2023",
+    "editedAt": "25 February 2023",
+    "createBy": "Maya"
+  },
+  {
+    "id": 26,
+    "warehouseName": "Gudang Bina Makmur",
+    "factoryName": "PT. Bina Makmur Jaya",
+    "warehouseAddress": "JL. Bina Makmur No. 9, RT 002 RW 001, Ds. Bina Makmur, Makmur, Bandung",
+    "contactPersonName": "Pak Bina Makmur",
+    "contactPersonNumber": "082298765432",
+    "createDate": "25 February 2023",
+    "editedAt": "25 February 2023",
+    "createBy": "Ahmad"
+  },
+  {
+    "id": 27,
+    "warehouseName": "Gudang Maju",
+    "factoryName": "PT. Maju Bersama",
+    "warehouseAddress": "JL. Maju No. 6, RT 003 RW 001, Ds. Maju, Bersama, Surabaya",
+    "contactPersonName": "Pak Maju",
+    "contactPersonNumber": "081276543210",
+    "createDate": "26 February 2023",
+    "editedAt": "26 February 2023",
+    "createBy": "Iqbal"
+  },
+  {
+    "id": 28,
+    "warehouseName": "Gudang Hijau Indah",
+    "factoryName": "PT. Hijau Indah Makmur",
+    "warehouseAddress": "JL. Hijau Indah No. 14, RT 001 RW 002, Ds. Hijau Indah, Makmur, Medan",
+    "contactPersonName": "Pak Hijau Indah",
+    "contactPersonNumber": "089876543210",
+    "createDate": "26 February 2023",
+    "editedAt": "26 February 2023",
+    "createBy": "Maya"
+  },
+  {
+    "id": 29,
+    "warehouseName": "Gudang Surya Abadi",
+    "factoryName": "PT. Surya Abadi Jaya",
+    "warehouseAddress": "JL. Surya Abadi No. 23, RT 001 RW 003, Ds. Surya Abadi, Jaya, Bandung",
+    "contactPersonName": "Pak Surya Abadi",
+    "contactPersonNumber": "081298765432",
+    "createDate": "26 February 2023",
+    "editedAt": "26 February 2023",
+    "createBy": "Ahmad"
+  },
+  {
+    "id": 30,
+    "warehouseName": "Gudang Sejahtera",
+    "factoryName": "PT. Sejahtera Makmur",
+    "warehouseAddress": "JL. Sejahtera No. 3, RT 002 RW 001, Ds. Sejahtera, Makmur, Jakarta",
+    "contactPersonName": "Pak Sejahtera",
+    "contactPersonNumber": "082187654321",
+    "createDate": "27 February 2023",
+    "editedAt": "27 February 2023",
+    "createBy": "Maya"
+  }
+]
