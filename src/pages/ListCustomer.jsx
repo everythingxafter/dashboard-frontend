@@ -99,7 +99,7 @@ function ListCustomer() {
             },
             {
                 Header: "Tanggal",
-                accessor: "createDate",
+                accessor: "createAt",
             },
             {
                 Header: "Keterangan",

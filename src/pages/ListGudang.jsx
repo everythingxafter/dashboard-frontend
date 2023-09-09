@@ -89,7 +89,7 @@ function ListGudang() {
             },
             {
                 Header: "Tanggal",
-                accessor: "createDate",
+                accessor: "createAt",
             },
             {
                 Header: "Di buat",

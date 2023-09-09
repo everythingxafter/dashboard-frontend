@@ -95,7 +95,7 @@ function ListSupplier() {
             },
             {
                 Header: "Tanggal",
-                accessor: "createDate",
+                accessor: "createAt",
             },
             {
                 Header: "Di buat",

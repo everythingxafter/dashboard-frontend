@@ -93,7 +93,7 @@ function ListKebun() {
             },
             {
                 Header: "Tanggal",
-                accessor: "createDate",
+                accessor: "createAt",
             },
             {
                 Header: "Di buat",
