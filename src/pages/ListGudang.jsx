@@ -9,15 +9,31 @@ function ListGudang() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('/mockupData/warehouseData.json') // Replace with the actual path to your JSON file
-            .then(response => {
-                setData(response.data);
-                setIsLoading(false);
+        const token = localStorage.getItem('Authorization'); // Retrieve the token from localStorage
+        console.log('Token:', token); // Log the token to the console
+        if (token) {
+            axios.get('http://localhost:3000/warehouses/read', {
+                headers: {
+                    'Authorization': `${token}`
+                }
             })
-            .catch(error => {
-                console.error("Error fetching data:", error);
-                setIsLoading(false);
-            });
+                .then(response => {
+                    // Sort the data in descending order based on "createdAt"
+                    const sortedData = response.data.warehouses.sort((a, b) => {
+                        return new Date(b.createdAt) - new Date(a.createdAt);
+                    });
+
+                    setData(sortedData);
+                    setIsLoading(false);
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                    setIsLoading(false);
+                });
+        } else {
+            console.error("No token available.");
+            setIsLoading(false);
+        }
     }, []);
 
     const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
@@ -89,7 +105,23 @@ function ListGudang() {
             },
             {
                 Header: "Tanggal",
-                accessor: "createAt",
+                accessor: "createdAt",
+                // eslint-disable-next-line react/prop-types
+                Cell: ({ value }) => {
+                    const date = new Date(value);
+
+                    // Get day, month, year
+                    const day = date.getDate();
+                    const month = new Intl.DateTimeFormat('id-ID', { month: 'long' }).format(date);
+                    const year = date.getFullYear();
+
+                    // Get hour and minute
+                    const hour = date.getHours().toString().padStart(2, '0');
+                    const minute = date.getMinutes().toString().padStart(2, '0');
+
+                    const formattedDate = `${day} ${month} ${year} - ${hour}.${minute}`;
+                    return <span>{formattedDate}</span>;
+                },
             },
             {
                 Header: "Di buat",
