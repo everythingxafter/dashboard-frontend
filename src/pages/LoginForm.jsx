@@ -1,46 +1,77 @@
-// src/LoginForm.js
-
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginSuccess, loginFailure } from '../redux/loginSlice';
-import { login } from '../api/api';
-import { Redirect } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const dispatch = useDispatch();
-    const token = useSelector((state) => state.login.token);
-    const error = useSelector((state) => state.login.error);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [token, setToken] = useState('');
+  const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const token = await login(username, password);
-            dispatch(loginSuccess(token));
-        } catch (error) {
-            dispatch(loginFailure('Login failed. Please check your credentials.'));
-        }
-    };
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
 
-    if (token) {
-        return <Redirect to="/home" />;
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:3000/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setToken(data.token);
+
+        // Save the token to localStorage
+        localStorage.setItem('Authorization', data.token);
+
+        // Redirect to home page
+        navigate('/');
+
+      } else {
+        console.error('Login failed:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
     }
+  };
 
-    return (
+  return (
+    <div>
+      <h2>Login</h2>
+      {token ? (
+        <div>
+          <p>Login successful!</p>
+        </div>
+      ) : (
         <form onSubmit={handleSubmit}>
-            <div>
-                <label>Username:</label>
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            </div>
-            <button type="submit">Login</button>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+          <label>
+            Username:
+            <input type="text" value={username} onChange={handleUsernameChange} />
+          </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" value={password} onChange={handlePasswordChange} />
+          </label>
+          <br />
+          <button type="submit">Login</button>
         </form>
-    );
+      )}
+    </div>
+  );
 };
 
 export default LoginForm;
