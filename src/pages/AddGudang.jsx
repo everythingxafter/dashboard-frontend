@@ -165,7 +165,9 @@ function AddGudang() {
                         <label htmlFor="contactPersonNumber">Nomer Telfon :</label>
                         <input className="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="contactPersonNumber" value={formData.contactPersonNumber} onChange={handleChange} placeholder="Nomer Telfon" />
                     </div>
-                    <button type="submit">Submit</button>
+                    <div className="flex my-8 justify-end">
+                        <button type="submit" className="py-2 px-3 bg-green-700 text-white rounded-lg shadow-xl hover:bg-green-900">Submit</button>
+                    </div>
                 </form>
 
             </div>

@@ -3,6 +3,7 @@ import Table from "../components/Table"
 import { PencilIcon, TrashIcon } from "@heroicons/react/solid";
 import ReactModal from 'react-modal';
 import axios from "axios";
+import jwt_decode from 'jwt-decode';
 
 function ListKebun() {
     const [data, setData] = useState([]);
@@ -81,6 +82,10 @@ function ListKebun() {
         setIsDeleteModalOpen(false);
     };
 
+    const token = localStorage.getItem('Authorization'); // Retrieve the token from localStorage
+    console.log('Token:', token); // Log the token to the console
+    const decodedToken = jwt_decode(token);
+
     const columns = React.useMemo(
         () => [
             {
@@ -127,40 +132,41 @@ function ListKebun() {
                     return <span>{formattedDate}</span>;
                 },
             },
-            {
-                Header: "Di buat",
-                accessor: "createBy",
-            },
-            {
-                Header: "Action",
-                accessor: "id", // You can use any unique identifier here
-                // eslint-disable-next-line react/prop-types
-                Cell: ({ row }) => (
-                    <div className="flex gap-2">
-                        <button
-                            // eslint-disable-next-line react/prop-types
-                            key={`edit_${row.id}`}
-                            // eslint-disable-next-line react/prop-types
-                            onClick={() => handleEdit(row.original.id)} // Implement your edit logic here
-                            className="text-indigo-600 hover:text-indigo-800 focus:outline-none"
-                        >
-                            <PencilIcon className="w-5 h-5" />
-                        </button>
-                        <button
-                            // eslint-disable-next-line react/prop-types
-                            key={`delete_${row.id}`}
-                            // eslint-disable-next-line react/prop-types
-                            onClick={() => handleDelete(row.original.id)} // Implement your delete logic here
-                            className="text-red-600 hover:text-red-800 focus:outline-none"
-                        >
-                            <TrashIcon className="w-5 h-5" />
-                        </button>
-                    </div>
-                ),
-            },
-
-        ],
-        [handleEdit, handleDelete] // Include the memoized functions in the dependency array
+            decodedToken.role !== 'member' ?
+                {
+                    Header: "Di buat",
+                    accessor: "createBy",
+                } : null,
+            decodedToken.role !== 'member' ?
+                {
+                    Header: "Action",
+                    accessor: "id",
+                    // eslint-disable-next-line react/prop-types
+                    Cell: ({ row }) => (
+                        <div className="flex gap-2">
+                            <button
+                                // eslint-disable-next-line react/prop-types
+                                key={`edit_${row.id}`}
+                                // eslint-disable-next-line react/prop-types
+                                onClick={() => handleEdit(row.original.id)}
+                                className="text-indigo-600 hover:text-indigo-800 focus:outline-none"
+                            >
+                                <PencilIcon className="w-5 h-5" />
+                            </button>
+                            <button
+                                // eslint-disable-next-line react/prop-types
+                                key={`delete_${row.id}`}
+                                // eslint-disable-next-line react/prop-types
+                                onClick={() => handleDelete(row.original.id)}
+                                className="text-red-600 hover:text-red-800 focus:outline-none"
+                            >
+                                <TrashIcon className="w-5 h-5" />
+                            </button>
+                        </div>
+                    ),
+                } : null,
+        ].filter(Boolean), // Remove any null or undefined columns
+        [decodedToken.role, handleEdit, handleDelete]
     );
 
 

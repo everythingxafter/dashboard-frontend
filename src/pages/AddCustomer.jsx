@@ -82,10 +82,6 @@ function AddCustomer() {
           <th style="text-align: right; min-width: 100%;">Service:</th>
           <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.service}</td>
         </tr>
-        <tr style="width: 100%;">
-        <th style="text-align: right; min-width: 100%;">create:</th>
-        <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.createBy}</td>
-      </tr>
       </table>
       </div>
         `;
@@ -211,7 +207,9 @@ function AddCustomer() {
                         <label htmlFor="keterangan">Keterangan :</label>
                         <input className="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="keterangan" value={formData.keterangan} onChange={handleChange} placeholder="Keterangan" />
                     </div>
-                    <button type="submit">Submit</button>
+                    <div className="flex my-8 justify-end">
+                        <button type="submit" className="py-2 px-3 bg-green-700 text-white rounded-lg shadow-xl hover:bg-green-900">Submit</button>
+                    </div>
                 </form>
 
             </div>
