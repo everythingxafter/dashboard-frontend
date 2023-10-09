@@ -3,12 +3,13 @@ import Table from "../components/Table"
 import { PencilIcon, TrashIcon } from "@heroicons/react/solid";
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import AccountEdit from '../handler/AccountEdit';
 
 function AccountCenter() {
     const token = localStorage.getItem('Authorization'); // Retrieve the token from localStorage
     console.log('Token:', token); // Log the token to the console
     const decodedToken = jwt_decode(token);
-
+    console.log('Decoded Token:', decodedToken); // Log the decoded token to the console
     ///list data
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -82,15 +83,8 @@ function AccountCenter() {
                     // eslint-disable-next-line react/prop-types
                     Cell: ({ row }) => (
                         <div className="flex gap-2">
-                            <button
-                                // eslint-disable-next-line react/prop-types
-                                key={`edit_${row.id}`}
-                                // eslint-disable-next-line react/prop-types
-                                onClick={() => console.log("edit")}
-                                className="text-indigo-600 hover:text-indigo-800 focus:outline-none"
-                            >
-                                <PencilIcon className="w-5 h-5" />
-                            </button>
+                            <AccountEdit userData={row.original} id={row.original.id} />
+                            {/* <PencilIcon className="w-5 h-5 text-green-700 cursor-pointer" onClick={() => console.log(`edit ${row.id} `)} /> */}
                             <button
                                 // eslint-disable-next-line react/prop-types
                                 key={`delete_${row.id}`}
@@ -120,6 +114,7 @@ function AccountCenter() {
                     )}
                 </div>
             </div>
+
         </div>
 
     )
