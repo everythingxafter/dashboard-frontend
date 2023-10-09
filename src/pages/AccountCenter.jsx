@@ -4,6 +4,7 @@ import { PencilIcon, TrashIcon } from "@heroicons/react/solid";
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import AccountEdit from '../handler/AccountEdit';
+import AccountDelete from '../handler/AccountDelete';
 
 function AccountCenter() {
     const token = localStorage.getItem('Authorization'); // Retrieve the token from localStorage
@@ -85,15 +86,7 @@ function AccountCenter() {
                         <div className="flex gap-2">
                             <AccountEdit userData={row.original} id={row.original.id} />
                             {/* <PencilIcon className="w-5 h-5 text-green-700 cursor-pointer" onClick={() => console.log(`edit ${row.id} `)} /> */}
-                            <button
-                                // eslint-disable-next-line react/prop-types
-                                key={`delete_${row.id}`}
-                                // eslint-disable-next-line react/prop-types
-                                onClick={() => console.log("delete")}
-                                className="text-red-600 hover:text-red-800 focus:outline-none"
-                            >
-                                <TrashIcon className="w-5 h-5" />
-                            </button>
+                            <AccountDelete userData={row.original} id={row.original.id} />
                         </div>
                     ),
                 } : null,

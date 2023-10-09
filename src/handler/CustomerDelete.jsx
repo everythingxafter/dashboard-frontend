@@ -1,25 +1,21 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { TrashIcon } from '@heroicons/react/solid';
-import Swal from 'sweetalert2';
+import React from 'react'
 
-const AccountDelete = ({ id, userData }) => {
+function CustomerDelete({ id, cusData }) {
     const [name, setName] = useState('');
 
     useEffect(() => {
-        if (userData) {
-            setName(userData.name || '');
+        if (cusData) {
+            setName(cusData.name || '');
         }
-    }, [userData]);
+    }, [cusData]);
 
     const handleDelete = () => {
         console.log('Delete user:', id);
-        console.log('User data:', userData);
 
 
         Swal.fire({
             title: 'Confirm Deletion',
-            html: `Are you sure you want to delete the user <strong>${userData.name}</strong>?`,
+            html: `Are you sure you want to delete the user <strong>${cusData.name}</strong>?`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes, delete',
@@ -30,7 +26,7 @@ const AccountDelete = ({ id, userData }) => {
 
                 // Make a DELETE request to the backend to delete the user with the authorization token header
                 axios
-                    .delete(`http://localhost:3000/users/delete/${id}`, {
+                    .delete(`http://localhost:3000/customers/delete/${id}`, {
                         headers: {
                             'Authorization': `${token}`
                         }
@@ -54,10 +50,9 @@ const AccountDelete = ({ id, userData }) => {
             }
         });
     };
-
     return (
         <TrashIcon className="w-5 h-5 text-red-700 cursor-pointer" onClick={handleDelete} />
-    );
-};
+    )
+}
 
-export default AccountDelete
+export default CustomerDelete
