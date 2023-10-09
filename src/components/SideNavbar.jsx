@@ -22,6 +22,11 @@ function SideNavbar() {
                         className='py-2 px-4 block rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'
                         to='/accountcenter'>Pusat Akun</Link>
                 </div>
+                <div>
+                    <Link
+                        className='py-2 px-4 block rounded-md hover:bg-slate-400 hover:shadow-md cursor-pointer'
+                        to='/adduser'>Tambah Akun</Link>
+                </div>
                 <div className='flex flex-col gap-2 my-2'>
                     <div className='py-2 px-4 text-center border-b-2 border-b-slate-400'>
                         <p>List</p>

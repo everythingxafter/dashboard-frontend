@@ -13,6 +13,7 @@ import AddKebun from "./pages/AddKebun";
 import AddSupplier from "./pages/AddSupplier";
 import AccountCenter from "./pages/AccountCenter";
 import LoginForm from "./pages/LoginForm";
+import AddUsers from "./pages/AddUsers";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/tambahkebun" element={<Layout><AddKebun /></Layout>} />
         <Route path="/tambahsupplier" element={<Layout><AddSupplier /></Layout>} />
         <Route path="/accountcenter" element={<Layout><AccountCenter /></Layout>} />
+        <Route path="/adduser" element={<Layout><AddUsers /></Layout>} />
       </Routes>
     </BrowserRouter>
   );

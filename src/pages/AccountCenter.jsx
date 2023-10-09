@@ -1,67 +1,27 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Table from "../components/Table"
 import { PencilIcon, TrashIcon } from "@heroicons/react/solid";
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import ReactModal from 'react-modal';
-
 
 function AccountCenter() {
-
-    const [formData, setFormData] = useState({
-        username: '',
-        password: '',
-        retypePassword: '',
-        name: '',
-        role: '',
-    });
-
-    const [showPassword, setShowPassword] = useState(false);
-    const [showRetypePassword, setShowRetypePassword] = useState(false);
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-    const handlePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const handleRetypePasswordVisibility = () => {
-        setShowRetypePassword(!showRetypePassword);
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const response = await axios.post('http://localhost:YOUR_BACKEND_PORT_HERE/create-user', formData);
-            console.log('User created successfully:', response.data.user);
-        } catch (error) {
-            console.error('Error creating user:', error);
-        }
-    };
+    const token = localStorage.getItem('Authorization'); // Retrieve the token from localStorage
+    console.log('Token:', token); // Log the token to the console
+    const decodedToken = jwt_decode(token);
 
     ///list data
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem('Authorization'); // Retrieve the token from localStorage
-        console.log('Token:', token); // Log the token to the console
-        const decodedToken = jwt_decode(token);
-        console.log('Decoded Token:', decodedToken);
-        if (token) {
-            axios.get('http://localhost:3000/users/read', {
-                headers: {
-                    'Authorization': `${token}`
-                }
-            })
-                .then(response => {
+        const fetchData = async () => {
+            try {
+                if (token) {
+                    const response = await axios.get('http://localhost:3000/users/read', {
+                        headers: {
+                            'Authorization': `${token}`
+                        }
+                    });
                     // Sort the data in descending order based on "createdAt"
                     const sortedData = response.data.users.sort((a, b) => {
                         return new Date(b.createdAt) - new Date(a.createdAt);
@@ -69,67 +29,19 @@ function AccountCenter() {
 
                     setData(sortedData);
                     setIsLoading(false);
-                })
-                .catch(error => {
-                    console.error("Error fetching data:", error);
+                } else {
+                    console.error("No token available.");
                     setIsLoading(false);
-                });
-        } else {
-            console.error("No token available.");
-            setIsLoading(false);
-        }
-    }, []);
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setIsLoading(false);
+            }
+        };
+        fetchData();
+    }, [token]);
 
-
-    const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
-    const [selectedItemId, setSelectedItemId] = React.useState(null);
-    const [selectedItemName, setSelectedItemName] = React.useState("");
-    const [selectedItemEstate, setSelectedItemEstate] = React.useState("");
-    const [selectedItemRegion, setSelectedItemRegion] = React.useState("");
-    const [selectedItemPrice, setSelectedItemPrice] = React.useState("");
-    const [selectedItemKeterangan, setSelectedItemKeterangan] = React.useState("");
-
-
-    const handleEdit = useCallback((id) => {
-        const selectedItem = data.find(item => item.id === id);
-        if (selectedItem) {
-            setSelectedItemId(selectedItem.id);
-            setSelectedItemName(selectedItem.name);
-            setSelectedItemEstate(selectedItem.estate);
-            setSelectedItemRegion(selectedItem.region);
-            setSelectedItemPrice(selectedItem.price);
-            setSelectedItemKeterangan(selectedItem.keterangan);
-            setIsEditModalOpen(true);
-        }
-    }, [data]);
-
-    const handleDelete = useCallback((id) => {
-        const selectedItem = data.find(item => item.id === id);
-        if (selectedItem) {
-            setSelectedItemId(selectedItem.id);
-            setSelectedItemName(selectedItem.name);
-            setSelectedItemEstate(selectedItem.estate);
-            setSelectedItemRegion(selectedItem.region);
-            setSelectedItemPrice(selectedItem.price);
-            setSelectedItemKeterangan(selectedItem.keterangan);
-            setIsDeleteModalOpen(true);
-        }
-    }, [data]);
-
-
-    const closeEditModal = () => {
-        setIsEditModalOpen(false);
-    };
-
-    const closeDeleteModal = () => {
-        setIsDeleteModalOpen(false);
-    };
-
-    const token = localStorage.getItem('Authorization'); // Retrieve the token from localStorage
-    console.log('Token:', token); // Log the token to the console
-    const decodedToken = jwt_decode(token);
-    const columns = React.useMemo(
+    const columns = useMemo(
         () => [
             {
                 Header: "Username",
@@ -165,11 +77,6 @@ function AccountCenter() {
             },
             decodedToken.role !== 'member' ?
                 {
-                    Header: "Di buat",
-                    accessor: "createBy",
-                } : null,
-            decodedToken.role !== 'member' ?
-                {
                     Header: "Action",
                     accessor: "id",
                     // eslint-disable-next-line react/prop-types
@@ -179,7 +86,7 @@ function AccountCenter() {
                                 // eslint-disable-next-line react/prop-types
                                 key={`edit_${row.id}`}
                                 // eslint-disable-next-line react/prop-types
-                                onClick={() => handleEdit(row.original.id)}
+                                onClick={() => console.log("edit")}
                                 className="text-indigo-600 hover:text-indigo-800 focus:outline-none"
                             >
                                 <PencilIcon className="w-5 h-5" />
@@ -188,7 +95,7 @@ function AccountCenter() {
                                 // eslint-disable-next-line react/prop-types
                                 key={`delete_${row.id}`}
                                 // eslint-disable-next-line react/prop-types
-                                onClick={() => handleDelete(row.original.id)}
+                                onClick={() => console.log("delete")}
                                 className="text-red-600 hover:text-red-800 focus:outline-none"
                             >
                                 <TrashIcon className="w-5 h-5" />
@@ -196,14 +103,11 @@ function AccountCenter() {
                         </div>
                     ),
                 } : null,
-        ].filter(Boolean), // Remove any null or undefined columns
-        [decodedToken.role, handleEdit, handleDelete]
+        ],
+        [decodedToken.role]
     );
     return (
         <div>
-            <div>
-                ini rencana nya tambah akun
-            </div>
             <div className="pt-5">
                 <div className="mx-5 bg-white p-3 rounded-xl shadow-md">
                     <div className="text-center">
@@ -212,56 +116,8 @@ function AccountCenter() {
                     {isLoading ? (
                         <p>Loading...</p>
                     ) : (
-                        <Table columns={columns} data={data} handleEdit={handleEdit} handleDelete={handleDelete} />
+                        <Table columns={columns} data={data} />
                     )}
-                    <ReactModal
-                        isOpen={isEditModalOpen}
-                        onRequestClose={closeEditModal}
-                        contentLabel="Edit Modal"
-                        className="w-full h-full flex justify-center items-center"
-                    >
-                        {/* Your edit modal content */}
-                        {/* Edit Modal Content for ID: {selectedItemId} */}
-                        <div className="w-1/2 h-2/3 bg-white border border-zinc-200 shadow-lg rounded-2xl p-4 flex flex-col justify-center items-center gap-2">
-                            <h1>Apakah anda ingin mengedit ini ?</h1>
-                            <div className="w-full flex flex-col justify-center items-center">
-                                <div className="w-full">
-                                    <div className="flex flex-col gap-1 mb-4">
-                                        <p>Nama :</p>
-                                        <input className="py-2 px-3 border rounded-md w-full shadow-md" type="text" value={selectedItemName} />
-                                    </div>
-                                    <div className="flex flex-col gap-1 mb-4">
-                                        <p>Estate :</p>
-                                        <input className="py-2 px-3 border rounded-md w-full shadow-md" type="text" value={selectedItemEstate} />
-                                    </div>
-                                    <div className="flex flex-col gap-1 mb-4">
-                                        <p>Region :</p>
-                                        <input className="py-2 px-3 border rounded-md w-full shadow-md" type="text" value={selectedItemRegion} />
-                                    </div>
-                                    <div className="flex flex-col gap-1 mb-4">
-                                        <p>Price :</p>
-                                        <input className="py-2 px-3 border rounded-md w-full shadow-md" type="text" value={selectedItemPrice} />
-                                    </div>
-                                    <div className="flex flex-col gap-1">
-                                        <p>Keterangan :</p>
-                                        <input className="py-2 px-3 border rounded-md w-full shadow-md" type="text" value={selectedItemKeterangan} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="mt-5 flex gap-5">
-                                <button className="py-2 px-4 bg-emerald-500 hover:bg-emerald-700 rounded-md">Simpan</button>
-                                <button className="py-2 px-4 bg-red-500 hover:bg-red-700 rounded-md">Batal</button>
-                            </div>
-                        </div>
-                    </ReactModal>
-                    <ReactModal
-                        isOpen={isDeleteModalOpen}
-                        onRequestClose={closeDeleteModal}
-                        contentLabel="Delete Modal"
-                    >
-                        {/* Your delete modal content */}
-                        Delete Modal Content for ID: {selectedItemId}
-                    </ReactModal>
                 </div>
             </div>
         </div>
