@@ -216,12 +216,12 @@ function Table({ columns, data }) {
                                         // new
                                         prepareRow(row);
                                         return (
-                                            <tr {...row.getRowProps()} key={i}>
-                                                {row.cells.map((cell,index) => {
+                                            <tr {...row.getRowProps()} key={i} className="hover:bg-slate-300 cursor-pointer">
+                                                {row.cells.map((cell, index) => {
                                                     return (
                                                         <td
                                                             {...cell.getCellProps()}
-                                                            className="px-6 py-4 whitespace-nowrap"
+                                                            className="px-6 py-4 whitespace-nowrap text-sm"
                                                             key={index}
                                                         >
                                                             {cell.render("Cell")}
