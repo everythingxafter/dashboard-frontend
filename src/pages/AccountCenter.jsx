@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
 import Table from "../components/Table"
-import { PencilIcon, TrashIcon } from "@heroicons/react/solid";
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import AccountEdit from '../handler/AccountEdit';
@@ -85,7 +84,6 @@ function AccountCenter() {
                     Cell: ({ row }) => (
                         <div className="flex gap-2">
                             <AccountEdit userData={row.original} id={row.original.id} />
-                            {/* <PencilIcon className="w-5 h-5 text-green-700 cursor-pointer" onClick={() => console.log(`edit ${row.id} `)} /> */}
                             <AccountDelete userData={row.original} id={row.original.id} />
                         </div>
                     ),
