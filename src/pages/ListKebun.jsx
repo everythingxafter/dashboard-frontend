@@ -1,10 +1,9 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "../components/Table"
-import { PencilIcon, TrashIcon } from "@heroicons/react/solid";
-import ReactModal from 'react-modal';
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
 import KebunEdit from "../handler/KebunEdit";
+import KebunDelete from "../handler/KebunDelete";
 
 function ListKebun() {
     const [data, setData] = useState([]);
@@ -37,51 +36,6 @@ function ListKebun() {
             setIsLoading(false);
         }
     }, []);
-
-    const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
-    const [selectedItemId, setSelectedItemId] = React.useState(null);
-    const [selectedItemName, setSelectedItemName] = React.useState("");
-    const [selectedItemEstate, setSelectedItemEstate] = React.useState("");
-    const [selectedItemRegion, setSelectedItemRegion] = React.useState("");
-    const [selectedItemPrice, setSelectedItemPrice] = React.useState("");
-    const [selectedItemKeterangan, setSelectedItemKeterangan] = React.useState("");
-
-
-    const handleEdit = useCallback((id) => {
-        const selectedItem = data.find(item => item.id === id);
-        if (selectedItem) {
-            setSelectedItemId(selectedItem.id);
-            setSelectedItemName(selectedItem.name);
-            setSelectedItemEstate(selectedItem.estate);
-            setSelectedItemRegion(selectedItem.region);
-            setSelectedItemPrice(selectedItem.price);
-            setSelectedItemKeterangan(selectedItem.keterangan);
-            setIsEditModalOpen(true);
-        }
-    }, [data]);
-
-    const handleDelete = useCallback((id) => {
-        const selectedItem = data.find(item => item.id === id);
-        if (selectedItem) {
-            setSelectedItemId(selectedItem.id);
-            setSelectedItemName(selectedItem.name);
-            setSelectedItemEstate(selectedItem.estate);
-            setSelectedItemRegion(selectedItem.region);
-            setSelectedItemPrice(selectedItem.price);
-            setSelectedItemKeterangan(selectedItem.keterangan);
-            setIsDeleteModalOpen(true);
-        }
-    }, [data]);
-
-
-    const closeEditModal = () => {
-        setIsEditModalOpen(false);
-    };
-
-    const closeDeleteModal = () => {
-        setIsDeleteModalOpen(false);
-    };
 
     const token = localStorage.getItem('Authorization'); // Retrieve the token from localStorage
     console.log('Token:', token); // Log the token to the console
@@ -146,20 +100,12 @@ function ListKebun() {
                     Cell: ({ row }) => (
                         <div className="flex gap-2">
                             <KebunEdit id={row.original.id} farmData={row.original} />
-                            <button
-                                // eslint-disable-next-line react/prop-types
-                                key={`delete_${row.id}`}
-                                // eslint-disable-next-line react/prop-types
-                                onClick={() => handleDelete(row.original.id)}
-                                className="text-red-600 hover:text-red-800 focus:outline-none"
-                            >
-                                <TrashIcon className="w-5 h-5" />
-                            </button>
+                            <KebunDelete id={row.original.id} farmData={row.original} />
                         </div>
                     ),
                 } : null,
         ].filter(Boolean), // Remove any null or undefined columns
-        [decodedToken.role, handleEdit, handleDelete]
+        [decodedToken.role]
     );
 
 
@@ -174,57 +120,8 @@ function ListKebun() {
                 {isLoading ? (
                     <p>Loading...</p>
                 ) : (
-                    <Table columns={columns} data={data} handleEdit={handleEdit} handleDelete={handleDelete} />
+                    <Table columns={columns} data={data} />
                 )}
-                <ReactModal
-                    isOpen={isEditModalOpen}
-                    onRequestClose={closeEditModal}
-                    contentLabel="Edit Modal"
-                    className="w-full h-full flex justify-center items-center"
-                >
-                    {/* Your edit modal content */}
-                    {/* Edit Modal Content for ID: {selectedItemId} */}
-                    <div className="w-1/2 h-2/3 bg-white border border-zinc-200 shadow-lg rounded-2xl p-4 flex flex-col justify-center items-center gap-2">
-                        <h1>Apakah anda ingin mengedit ini ?</h1>
-                        <div className="w-full flex flex-col justify-center items-center">
-                            <div className="w-full">
-                                <div className="flex flex-col gap-1 mb-4">
-                                    <p>Nama :</p>
-                                    <input className="py-2 px-3 border rounded-md w-full shadow-md" type="text" value={selectedItemName} />
-                                </div>
-                                <div className="flex flex-col gap-1 mb-4">
-                                    <p>Estate :</p>
-                                    <input className="py-2 px-3 border rounded-md w-full shadow-md" type="text" value={selectedItemEstate} />
-                                </div>
-                                <div className="flex flex-col gap-1 mb-4">
-                                    <p>Region :</p>
-                                    <input className="py-2 px-3 border rounded-md w-full shadow-md" type="text" value={selectedItemRegion} />
-                                </div>
-                                <div className="flex flex-col gap-1 mb-4">
-                                    <p>Price :</p>
-                                    <input className="py-2 px-3 border rounded-md w-full shadow-md" type="text" value={selectedItemPrice} />
-                                </div>
-                                <div className="flex flex-col gap-1">
-                                    <p>Keterangan :</p>
-                                    <input className="py-2 px-3 border rounded-md w-full shadow-md" type="text" value={selectedItemKeterangan} />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="mt-5 flex gap-5">
-                            <button className="py-2 px-4 bg-emerald-500 hover:bg-emerald-700 rounded-md">Simpan</button>
-                            <button className="py-2 px-4 bg-red-500 hover:bg-red-700 rounded-md">Batal</button>
-                        </div>
-                    </div>
-                </ReactModal>
-                <ReactModal
-                    isOpen={isDeleteModalOpen}
-                    onRequestClose={closeDeleteModal}
-                    contentLabel="Delete Modal"
-                >
-                    {/* Your delete modal content */}
-                    Delete Modal Content for ID: {selectedItemId}
-                </ReactModal>
-
             </div>
         </div>
     )
