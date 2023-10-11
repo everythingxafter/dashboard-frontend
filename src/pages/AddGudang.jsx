@@ -44,28 +44,24 @@ function AddGudang() {
         <div class="flex">
         <table style="width: 100%;">
         <tr style="width: 100%;">
-          <th style="text-align: right;min-width: 100%;">Customer Name:</th>
+          <th style="text-align: right;min-width: 100%;">Nama Gudang :</th>
           <td style="text-align: left; padding-left: 12px;min-width: 100%;">${formData.warehouseName}</td>
         </tr>
         <tr style="width: 100%;">
-          <th style="text-align: right; min-width: 100%;">Name:</th>
+          <th style="text-align: right; min-width: 100%;">Nama Pabrik :</th>
           <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.factoryName}</td>
         </tr>
         <tr style="width: 100%;">
-          <th style="text-align: right; min-width: 100%;">Estate:</th>
+          <th style="text-align: right; min-width: 100%;">Alamat Gudang :</th>
           <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.warehouseAddress}</td>
         </tr>
         <tr style="width: 100%;">
-          <th style="text-align: right; min-width: 100%;">Region:</th>
+          <th style="text-align: right; min-width: 100%;">Contact Person :</th>
           <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.contactPersonName}</td>
         </tr>
         <tr style="width: 100%;">
-          <th style="text-align: right; min-width: 100%;">Price:</th>
+          <th style="text-align: right; min-width: 100%;">Nomer Telfon:</th>
           <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.contactPersonNumber}</td>
-        </tr>
-        <tr style="width: 100%;">
-            <th style="text-align: right; min-width: 100%;">create:</th>
-            <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.createBy}</td>
         </tr>
       </table>
       </div>
