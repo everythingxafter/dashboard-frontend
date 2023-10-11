@@ -13,8 +13,7 @@ const AddUsers = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [passwordError, setPasswordError] = useState("");
 
-    const token = localStorage.getItem('Authorization'); // Retrieve the token from localStorage
-    console.log('Token:', token); // Log the token to the console
+    const token = localStorage.getItem('Authorization');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,7 +33,6 @@ const AddUsers = () => {
                     'Authorization': `${token}`
                 }
             });
-            console.log(response.data);
         } catch (error) {
             console.log(error.response.data);
         }

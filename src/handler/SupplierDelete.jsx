@@ -74,8 +74,7 @@ function SupplierDelete({ id, supData }) {
                             window.location.reload();
                         })
                     })
-                    .catch((err) => {
-                        console.log(err);
+                    .catch(() => {
                         Swal.fire({
                             title: 'Error',
                             text: 'Failed to delete supplier',

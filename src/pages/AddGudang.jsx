@@ -17,13 +17,12 @@ function AddGudang() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Check if any required fields are empty
         const requiredFields = ['warehouseName', 'factoryName', 'warehouseAddress', 'contactPersonName', 'contactPersonNumber'];
         const emptyFields = requiredFields.filter(field => !formData[field] || formData[field].trim() === '');
 
         const token = localStorage.getItem('Authorization')
         const decodedToken = jwt_decode(token);
-        const username = decodedToken.name; // Extract username from the token
+        const username = decodedToken.name;
 
         const updatedFormData = {
             ...formData,
@@ -41,7 +40,6 @@ function AddGudang() {
             return;
         }
 
-        // Construct a preview of the data
         const dataPreview = `
         <div class="flex">
         <table style="width: 100%;">
@@ -82,15 +80,14 @@ function AddGudang() {
         }).then(async (confirmResult) => {
             if (confirmResult.isConfirmed) {
                 try {
-                    const token = localStorage.getItem('Authorization'); // Get the token from localStorage
-
+                    const token = localStorage.getItem('Authorization');
                     if (!token) {
                         console.error('No token found. Please log in.');
                         return;
                     }
 
                     const decodedToken = jwt_decode(token);
-                    const username = decodedToken.name; // Extract username from the token
+                    const username = decodedToken.name;
 
                     const updatedFormData = {
                         ...formData,
@@ -109,8 +106,6 @@ function AddGudang() {
                         title: 'Success',
                         text: 'Data added successfully!',
                     });
-
-                    console.log('Data added successfully:', response.data.warehouse);
                 } catch (error) {
                     console.error('Error adding data:', error);
                     Swal.fire({
@@ -128,7 +123,7 @@ function AddGudang() {
         const { name, value } = e.target;
         const token = localStorage.getItem('Authorization')
         const decodedToken = jwt_decode(token);
-        const username = decodedToken.name; // Extract username from the token
+        const username = decodedToken.name;
 
         const updatedFormData = {
             ...formData,

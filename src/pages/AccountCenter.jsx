@@ -6,11 +6,9 @@ import AccountEdit from '../handler/AccountEdit';
 import AccountDelete from '../handler/AccountDelete';
 
 function AccountCenter() {
-    const token = localStorage.getItem('Authorization'); // Retrieve the token from localStorage
-    console.log('Token:', token); // Log the token to the console
+    const token = localStorage.getItem('Authorization');
     const decodedToken = jwt_decode(token);
-    console.log('Decoded Token:', decodedToken); // Log the decoded token to the console
-    ///list data
+
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -23,7 +21,6 @@ function AccountCenter() {
                             'Authorization': `${token}`
                         }
                     });
-                    // Sort the data in descending order based on "createdAt"
                     const sortedData = response.data.users.sort((a, b) => {
                         return new Date(b.createdAt) - new Date(a.createdAt);
                     });
@@ -63,12 +60,10 @@ function AccountCenter() {
                 Cell: ({ value }) => {
                     const date = new Date(value);
 
-                    // Get day, month, year
                     const day = date.getDate();
                     const month = new Intl.DateTimeFormat('id-ID', { month: 'long' }).format(date);
                     const year = date.getFullYear();
 
-                    // Get hour and minute
                     const hour = date.getHours().toString().padStart(2, '0');
                     const minute = date.getMinutes().toString().padStart(2, '0');
 

@@ -11,8 +11,7 @@ function ListSupplier() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem('Authorization'); // Retrieve the token from localStorage
-        console.log('Token:', token); // Log the token to the console
+        const token = localStorage.getItem('Authorization');
         if (token) {
             axios.get('http://localhost:3000/suppliers/read', {
                 headers: {
@@ -20,7 +19,7 @@ function ListSupplier() {
                 }
             })
                 .then(response => {
-                    // Sort the data in descending order based on "createdAt"
+
                     const sortedData = response.data.suppliers.sort((a, b) => {
                         return new Date(b.createdAt) - new Date(a.createdAt);
                     });
@@ -38,8 +37,7 @@ function ListSupplier() {
         }
     }, []);
 
-    const token = localStorage.getItem('Authorization'); // Retrieve the token from localStorage
-    console.log('Token:', token); // Log the token to the console
+    const token = localStorage.getItem('Authorization');
     const decodedToken = jwt_decode(token);
 
     const columns = React.useMemo(
@@ -77,12 +75,10 @@ function ListSupplier() {
                 Cell: ({ value }) => {
                     const date = new Date(value);
 
-                    // Get day, month, year
                     const day = date.getDate();
                     const month = new Intl.DateTimeFormat('id-ID', { month: 'long' }).format(date);
                     const year = date.getFullYear();
 
-                    // Get hour and minute
                     const hour = date.getHours().toString().padStart(2, '0');
                     const minute = date.getMinutes().toString().padStart(2, '0');
 
@@ -107,7 +103,7 @@ function ListSupplier() {
                         </div>
                     ),
                 } : null,
-        ].filter(Boolean), // Remove any null or undefined columns
+        ].filter(Boolean),
         [decodedToken.role]
     );
 

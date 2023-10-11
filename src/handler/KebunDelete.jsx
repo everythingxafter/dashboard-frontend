@@ -78,11 +78,10 @@ function KebunDelete({ id, farmData }) {
                         window.location.reload();
                     })
                 })
-                    .catch((err) => {
-                        console.log(err);
+                    .catch(() => {
                         Swal.fire({
                             title: 'Error',
-                            text: 'Failed to delete farm',
+                            text: 'Failed to delete farm, ',
                             icon: 'error',
                             confirmButtonText: 'OK'
                         })

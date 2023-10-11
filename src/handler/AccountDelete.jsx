@@ -13,9 +13,6 @@ const AccountDelete = ({ id, userData }) => {
     }, [userData]);
 
     const handleDelete = () => {
-        console.log('Delete user:', id);
-        console.log('User data:', userData);
-
 
         Swal.fire({
             title: 'Confirm Deletion',
@@ -27,29 +24,23 @@ const AccountDelete = ({ id, userData }) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 const token = localStorage.getItem('Authorization');
-
-                // Make a DELETE request to the backend to delete the user with the authorization token header
-                axios
-                    .delete(`http://localhost:3000/users/delete/${id}`, {
-                        headers: {
-                            'Authorization': `${token}`
-                        }
-                    })
+                axios.delete(`http://localhost:3000/users/delete/${id}`, {
+                    headers: {
+                        'Authorization': `${token}`
+                    }
+                })
                     .then((response) => {
                         Swal.fire({
                             title: 'User Deleted',
                             text: response.data.message,
                             icon: 'success',
                             didClose: () => {
-                                // Reload the page after the success animation and modal are closed
                                 window.location.reload();
                             }
                         });
                     })
                     .catch((error) => {
                         Swal.fire('Error', 'Failed to delete user', 'error');
-                        console.error('Error deleting user:', error);
-                        // Handle any errors that occur during deletion if needed
                     });
             }
         });

@@ -34,10 +34,8 @@ const LoginForm = () => {
         const data = await response.json();
         setToken(data.token);
 
-        // Save the token to localStorage
         localStorage.setItem('Authorization', data.token);
 
-        // Redirect to home page
         navigate('/');
 
       } else {

@@ -15,25 +15,22 @@ function AddSupplier() {
     });
 
     const formatPriceDisplay = (price) => {
-        // Format price with dot separator
         return price.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     };
 
     const formatPriceForPost = (price) => {
-        // Remove dot separator before posting
         return price.replace(/\./g, "");
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Check if any required fields are empty
         const requiredFields = ['supplierName', 'supplierService', 'destination', 'price'];
         const emptyFields = requiredFields.filter(field => !formData[field] || formData[field].trim() === '');
 
         const token = localStorage.getItem('Authorization')
         const decodedToken = jwt_decode(token);
-        const username = decodedToken.name; // Extract username from the token
+        const username = decodedToken.name;
 
         const updatedFormData = {
             ...formData,
@@ -52,7 +49,6 @@ function AddSupplier() {
             return;
         }
 
-        // Construct a preview of the data
         const dataPreview = `
         <div class="flex">
         <table style="width: 100%;">
@@ -89,7 +85,7 @@ function AddSupplier() {
         }).then(async (confirmResult) => {
             if (confirmResult.isConfirmed) {
                 try {
-                    const token = localStorage.getItem('Authorization'); // Get the token from localStorage
+                    const token = localStorage.getItem('Authorization');
 
                     if (!token) {
                         console.error('No token found. Please log in.');
@@ -97,7 +93,7 @@ function AddSupplier() {
                     }
 
                     const decodedToken = jwt_decode(token);
-                    const username = decodedToken.name; // Extract username from the token
+                    const username = decodedToken.name;
 
                     const updatedFormData = {
                         ...formData,
@@ -117,8 +113,6 @@ function AddSupplier() {
                         title: 'Success',
                         text: 'Data added successfully!',
                     });
-
-                    console.log('Data added successfully:', response.data.supplier);
                 } catch (error) {
                     console.error('Error adding data:', error);
                     Swal.fire({
@@ -133,7 +127,6 @@ function AddSupplier() {
 
     const handlePriceChange = (e) => {
         const inputValue = e.target.value;
-        // Allow only numeric characters and backspace
         const numericValue = inputValue.replace(/[^0-9]/g, '');
         setFormData({
             ...formData,
@@ -145,7 +138,7 @@ function AddSupplier() {
         const { name, value } = e.target;
         const token = localStorage.getItem('Authorization')
         const decodedToken = jwt_decode(token);
-        const username = decodedToken.name; // Extract username from the token
+        const username = decodedToken.name;
 
         const updatedFormData = {
             ...formData,
