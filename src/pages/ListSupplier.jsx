@@ -4,6 +4,7 @@ import { PencilIcon, TrashIcon } from "@heroicons/react/solid";
 import ReactModal from 'react-modal';
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
+import SupplierEdit from "../handler/SupplierEdit";
 
 
 function ListSupplier() {
@@ -147,15 +148,7 @@ function ListSupplier() {
                     // eslint-disable-next-line react/prop-types
                     Cell: ({ row }) => (
                         <div className="flex gap-2">
-                            <button
-                                // eslint-disable-next-line react/prop-types
-                                key={`edit_${row.id}`}
-                                // eslint-disable-next-line react/prop-types
-                                onClick={() => handleEdit(row.original.id)}
-                                className="text-indigo-600 hover:text-indigo-800 focus:outline-none"
-                            >
-                                <PencilIcon className="w-5 h-5" />
-                            </button>
+                            <SupplierEdit id={row.original.id} supData={row.original} />
                             <button
                                 // eslint-disable-next-line react/prop-types
                                 key={`delete_${row.id}`}
