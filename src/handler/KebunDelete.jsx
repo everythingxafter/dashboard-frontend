@@ -56,7 +56,7 @@ function KebunDelete({ id, farmData }) {
         `;
 
         Swal.fire({
-            title: 'Are you sure dalete farm ?',
+            title: 'Are you sure delete farm ?',
             html: dataPreview,
             icon: 'warning',
             showCancelButton: true,
