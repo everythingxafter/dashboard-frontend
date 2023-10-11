@@ -73,7 +73,7 @@ function SupplierEdit({ id, supData }) {
                 const updatePrice = document.getElementById('swal-input4').value;
                 const updateKeterangan = document.getElementById('swal-input5').value;
 
-                if (!updateSupplierName || !updateSupplierService || !updateDestination || !updatePrice || !updateKeterangan) {
+                if (!updateSupplierName || !updateSupplierService || !updateDestination || !updatePrice) {
                     Swal.showValidationMessage(`Please fill all the required fields`)
                 } else {
                     const updatedData = {
@@ -89,15 +89,15 @@ function SupplierEdit({ id, supData }) {
                             Authorization: `${token}`
                         }
                     }).then((res) => {
-                        if (res.status === 200) {
+                        if (res.data.updatedSupplier) {
                             Swal.fire({
+                                title: 'Supplier Updated !',
+                                text: response.data.message,
                                 icon: 'success',
-                                title: 'Success',
-                                text: 'Supplier has been updated',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                            window.location.reload();
+                                didClose: () => {
+                                    window.location.reload();
+                                }
+                            });
                         } else {
                             Swal.fire({
                                 icon: 'error',
