@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Table, { SelectColumnFilter } from "../components/Table"
-import { PencilIcon } from "@heroicons/react/solid";
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import CustomerDelete from "../handler/CustomerDelete";
@@ -43,11 +42,11 @@ function ListCustomer() {
     const columns = React.useMemo(
         () => [
             {
-                Header: "Nama Customer",
+                Header: "Customer Name",
                 accessor: "customerName"
             },
             {
-                Header: "Name",
+                Header: "Group Estate Name",
                 accessor: "name"
             },
             {

@@ -34,7 +34,7 @@ function CustomerDelete({ id, cusData }) {
           <td style="text-align: left; padding-left: 12px;min-width: 100%;">${cusData.customerName}</td>
         </tr>
         <tr style="width: 100%;">
-          <th style="text-align: right; min-width: 100%;">Name:</th>
+          <th style="text-align: right; min-width: 100%;">Group Estate Name:</th>
           <td style="text-align: left; padding-left: 12px; min-width: 100%;">${cusData.name}</td>
         </tr>
         <tr style="width: 100%;">

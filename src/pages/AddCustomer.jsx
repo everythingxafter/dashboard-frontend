@@ -3,8 +3,10 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { useNavigate } from 'react-router-dom'
 
 function AddCustomer() {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         customerName: '',
         name: '',
@@ -59,7 +61,7 @@ function AddCustomer() {
           <td style="text-align: left; padding-left: 12px;min-width: 100%;">${formData.customerName}</td>
         </tr>
         <tr style="width: 100%;">
-          <th style="text-align: right; min-width: 100%;">Name:</th>
+          <th style="text-align: right; min-width: 100%;">Group Estate Name:</th>
           <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.name}</td>
         </tr>
         <tr style="width: 100%;">
@@ -118,7 +120,9 @@ function AddCustomer() {
                         icon: 'success',
                         title: 'Success',
                         text: 'Data added successfully!',
-                    });
+                    }).then(() => {
+                        navigate('/listcustomer')
+                    })
                 } catch (error) {
                     console.error('Error adding data:', error);
                     Swal.fire({
@@ -163,11 +167,11 @@ function AddCustomer() {
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-2 mb-4">
-                        <label htmlFor="customerName">Nama Konsumen :</label>
+                        <label htmlFor="customerName">Customer Name :</label>
                         <input className="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="customerName" value={formData.customerName} onChange={handleChange} placeholder="Customer Name" />
                     </div>
                     <div className="flex flex-col gap-2 mb-4">
-                        <label htmlFor="name">Nama :</label>
+                        <label htmlFor="name">Group Estate Name :</label>
                         <input className="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Nama PT." />
                     </div>
                     <div className="flex flex-col gap-2 mb-4">

@@ -28,12 +28,12 @@ function CustomerEdit({ id, cusData }) {
     const dataPreview = `
     <div class="flex flex-col gap-2">
     <div class="flex flex-col gap-1 mb-2">
-        <label class="text-left font-medium">Nama Konsumen :</label>
+        <label class="text-left font-medium">Customer Name :</label>
         <input id="swal-input1" class="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
         type="text" name="customerName" value="${customerName}" placeholder="Customer Name" />
     </div>
     <div class="flex flex-col gap-1 mb-2">
-        <label class="text-left font-medium">Nama :</label>
+        <label class="text-left font-medium">Group Estate Name :</label>
         <input id="swal-input2" class="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
         type="text" name="name" value="${name}" placeholder="Nama PT." />
     </div>
