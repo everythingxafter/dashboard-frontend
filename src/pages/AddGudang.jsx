@@ -3,6 +3,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { useNavigate } from "react-router-dom";
 
 function AddGudang() {
     const [formData, setFormData] = useState({
@@ -13,6 +14,8 @@ function AddGudang() {
         contactPersonNumber: '',
         createBy: '',
     });
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -101,7 +104,9 @@ function AddGudang() {
                         icon: 'success',
                         title: 'Success',
                         text: 'Data added successfully!',
-                    });
+                    }).then(() => {
+                        navigate('/listgudang');
+                    })
                 } catch (error) {
                     console.error('Error adding data:', error);
                     Swal.fire({

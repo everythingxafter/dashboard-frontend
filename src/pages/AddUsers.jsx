@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+import { useNavigate } from "react-router-dom";
 
 const AddUsers = () => {
     const [formData, setFormData] = useState({
@@ -14,6 +17,7 @@ const AddUsers = () => {
     const [passwordError, setPasswordError] = useState("");
 
     const token = localStorage.getItem('Authorization');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,21 +25,46 @@ const AddUsers = () => {
             setPasswordError("Passwords do not match");
             return;
         }
-        try {
-            const token = localStorage.getItem('Authorization');
-            if (!token) {
-                alert('No token found. Please log in.');
-                return;
-            }
 
-            const response = await axios.post('http://localhost:3000/users/create', formData, {
-                headers: {
-                    'Authorization': `${token}`
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You are about to add a new user.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#4caf50',
+            cancelButtonColor: '#f44336',
+            confirmButtonText: 'Yes, add user!'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const token = localStorage.getItem('Authorization');
+                    if (!token) {
+                        alert('No token found. Please log in.');
+                        return;
+                    }
+
+                    const response = await axios.post('http://localhost:3000/users/create', formData, {
+                        headers: {
+                            'Authorization': `${token}`
+                        }
+                    });
+
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Data added successfully!',
+                    }).then(() => {
+                        navigate('/accountcenter');
+                    })
+
+                } catch (error) {
+                    console.log(error.response.data);
                 }
-            });
-        } catch (error) {
-            console.log(error.response.data);
-        }
+            }
+        });
+
+
     };
 
     const togglePasswordVisibility = () => {
