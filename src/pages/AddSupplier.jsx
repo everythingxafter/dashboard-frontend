@@ -3,6 +3,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { useNavigate } from "react-router-dom";
 
 function AddSupplier() {
     const [formData, setFormData] = useState({
@@ -13,6 +14,8 @@ function AddSupplier() {
         createBy: '',
         keterangan: '',
     });
+
+    const navigate = useNavigate();
 
     const formatPriceDisplay = (price) => {
         return price.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -112,7 +115,9 @@ function AddSupplier() {
                         icon: 'success',
                         title: 'Success',
                         text: 'Data added successfully!',
-                    });
+                    }).then(() => {
+                        navigate('/listsupplier');
+                    })
                 } catch (error) {
                     console.error('Error adding data:', error);
                     Swal.fire({
