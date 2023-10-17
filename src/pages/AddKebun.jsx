@@ -3,6 +3,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { useNavigate } from "react-router-dom";
 
 function AddKebun() {
     const [formData, setFormData] = useState({
@@ -14,6 +15,8 @@ function AddKebun() {
         contactPersonNumber: '',
         createBy: '',
     });
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -45,32 +48,28 @@ function AddKebun() {
         <div class="flex">
         <table style="width: 100%;">
         <tr style="width: 100%;">
-          <th style="text-align: right;min-width: 100%;">Customer Name:</th>
+          <th style="text-align: right;min-width: 100%;">Nama Kebun:</th>
           <td style="text-align: left; padding-left: 12px;min-width: 100%;">${formData.farmName}</td>
         </tr>
         <tr style="width: 100%;">
-          <th style="text-align: right; min-width: 100%;">Name:</th>
+          <th style="text-align: right; min-width: 100%;">Estate:</th>
           <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.estate}</td>
         </tr>
         <tr style="width: 100%;">
-          <th style="text-align: right; min-width: 100%;">Estate:</th>
+          <th style="text-align: right; min-width: 100%;">Akamat Tujuan:</th>
           <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.farmAddress}</td>
         </tr>
         <tr style="width: 100%;">
-          <th style="text-align: right; min-width: 100%;">Estate:</th>
+          <th style="text-align: right; min-width: 100%;">Dermaga Sandar:</th>
           <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.dockName}</td>
         </tr>
         <tr style="width: 100%;">
-          <th style="text-align: right; min-width: 100%;">Region:</th>
+          <th style="text-align: right; min-width: 100%;">Contact Person:</th>
           <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.contactPersonName}</td>
         </tr>
         <tr style="width: 100%;">
-          <th style="text-align: right; min-width: 100%;">Price:</th>
+          <th style="text-align: right; min-width: 100%;">Nomer Telfon:</th>
           <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.contactPersonNumber}</td>
-        </tr>
-        <tr style="width: 100%;">
-            <th style="text-align: right; min-width: 100%;">create:</th>
-            <td style="text-align: left; padding-left: 12px; min-width: 100%;">${formData.createBy}</td>
         </tr>
       </table>
       </div>
@@ -111,7 +110,9 @@ function AddKebun() {
                         icon: 'success',
                         title: 'Success',
                         text: 'Data added successfully!',
-                    });
+                    }).then(() => {
+                        navigate('/listkebun');
+                    })
                 } catch (error) {
                     console.error('Error adding data:', error);
                     Swal.fire({
