@@ -14,6 +14,7 @@ import AddSupplier from "./pages/AddSupplier";
 import AccountCenter from "./pages/AccountCenter";
 import LoginForm from "./pages/LoginForm";
 import AddUsers from "./pages/AddUsers";
+import PrintData from "./pages/PrintData";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/tambahsupplier" element={<Layout><AddSupplier /></Layout>} />
         <Route path="/accountcenter" element={<Layout><AccountCenter /></Layout>} />
         <Route path="/adduser" element={<Layout><AddUsers /></Layout>} />
+        <Route path="/printdata" element={<Layout><PrintData /></Layout>} />
       </Routes>
     </BrowserRouter>
   );
