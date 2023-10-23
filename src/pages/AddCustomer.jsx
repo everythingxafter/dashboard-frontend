@@ -198,6 +198,7 @@ function AddCustomer() {
                             <option value="Port to Port">Port to Port</option>
                             <option value="Door to Door">Door to Door</option>
                             <option value="Port to Door">Port to Door</option>
+                            <option value="Door to Port">Door to Port</option>
                         </select>
                     </div>
                     <div className="flex flex-col gap-2 mb-4">

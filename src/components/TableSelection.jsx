@@ -203,12 +203,12 @@ function TableSelection({ columns, data }) {
                                         // new
                                         prepareRow(row);
                                         return (
-                                            <tr {...row.getRowProps()} key={i} className="hover:bg-slate-300 cursor-pointer">
+                                            <tr {...row.getRowProps()} key={i} className="hover:bg-slate-300">
                                                 {row.cells.map((cell, index) => {
                                                     return (
                                                         <td
                                                             {...cell.getCellProps()}
-                                                            className="px-6 py-4 whitespace-nowrap text-sm"
+                                                            className="px-5 py-3 text-sm whitespace-pre-wrap"
                                                             key={index}
                                                         >
                                                             {cell.render("Cell")}

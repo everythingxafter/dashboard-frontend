@@ -92,7 +92,7 @@ function SupplierEdit({ id, supData }) {
                         if (res.data.updatedSupplier) {
                             Swal.fire({
                                 title: 'Supplier Updated !',
-                                text: response.data.message,
+                                text: res.data.message,
                                 icon: 'success',
                                 didClose: () => {
                                     window.location.reload();

@@ -62,6 +62,7 @@ function CustomerEdit({ id, cusData }) {
             <option value="Port to Port" ${service === 'Port to Port' ? 'selected' : ''}>Port to Port</option>
             <option value="Door to Door" ${service === 'Door to Door' ? 'selected' : ''}>Door to Door</option>
             <option value="Port to Door" ${service === 'Port to Door' ? 'selected' : ''}>Port to Door</option>
+            <option value="Door to Port" ${service === 'Door to Port' ? 'selected' : ''}>Door to Port</option>
         </select>
     </div>
     <div class="flex flex-col gap-1 mb-2">

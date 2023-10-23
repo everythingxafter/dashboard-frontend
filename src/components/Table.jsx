@@ -96,7 +96,7 @@ export function SelectColumnFilter({
         <label className="flex gap-x-2 items-baseline">
             <span className="text-gray-700">{render("Header")}: </span>
             <select
-                className="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="mt-1 block py-2 px-4 rounded-xl border-gray-300 shadow-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 name={id}
                 id={id}
                 value={filterValue}
@@ -216,12 +216,12 @@ function Table({ columns, data }) {
                                         // new
                                         prepareRow(row);
                                         return (
-                                            <tr {...row.getRowProps()} key={i} className="hover:bg-slate-300 cursor-pointer">
+                                            <tr {...row.getRowProps()} key={i} className="hover:bg-slate-300">
                                                 {row.cells.map((cell, index) => {
                                                     return (
                                                         <td
                                                             {...cell.getCellProps()}
-                                                            className="px-6 py-4 whitespace-nowrap text-sm"
+                                                            className="px-5 py-3 text-sm whitespace-pre-wrap"
                                                             key={index}
                                                         >
                                                             {cell.render("Cell")}
@@ -247,7 +247,7 @@ function Table({ columns, data }) {
                     </Button>
                 </div>
                 <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                    <div className="flex gap-x-2">
+                    <div className="flex gap-x-2 items-center">
                         <span className="text-sm text-gray-700">
                             Page <span className="font-medium">{state.pageIndex + 1}</span> of{" "}
                             <span className="font-medium">{pageOptions.length}</span>
@@ -255,7 +255,7 @@ function Table({ columns, data }) {
                         <label>
                             <span className="sr-only">Items Per Page</span>
                             <select
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                className="mt-1 block py-2 px-4 w-full rounded-xl border-gray-300 shadow-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 value={state.pageSize}
                                 onChange={(e) => {
                                     setPageSize(Number(e.target.value));
