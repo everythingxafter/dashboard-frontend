@@ -21,7 +21,11 @@ function AccountCenter() {
                             'Authorization': `${token}`
                         }
                     });
-                    const sortedData = response.data.users.sort((a, b) => {
+                    const unfilteredData = response.data.users;
+
+                    const filteredData = unfilteredData.filter(user => user.role !== 'superadmin');
+
+                    const sortedData = filteredData.sort((a, b) => {
                         return new Date(b.createdAt) - new Date(a.createdAt);
                     });
 

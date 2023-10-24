@@ -11,3 +11,13 @@
 .error-border {
   border: 1px solid red;
 }
+
+.list-section {
+  transition: max-height 1s ease-in-out;
+  overflow: hidden;
+  max-height: 1000px;
+}
+
+.open {
+  max-height: 1000px;
+}

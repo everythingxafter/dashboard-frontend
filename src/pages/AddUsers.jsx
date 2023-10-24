@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
 import Swal from "sweetalert2";
@@ -15,12 +15,38 @@ const AddUsers = () => {
     });
     const [showPassword, setShowPassword] = useState(false);
     const [passwordError, setPasswordError] = useState("");
+    const [inputError, setInputError] = useState({
+        username: false,
+        password: false,
+        retypePassword: false,
+        name: false,
+        role: false,
+    });
 
     const token = localStorage.getItem('Authorization');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Check if any field is empty
+        if (
+            !formData.username ||
+            !formData.password ||
+            !formData.retypePassword ||
+            !formData.name ||
+            !formData.role
+        ) {
+            setInputError({
+                username: !formData.username,
+                password: !formData.password,
+                retypePassword: !formData.retypePassword,
+                name: !formData.name,
+                role: !formData.role,
+            });
+            return;
+        }
+
         if (formData.password !== formData.retypePassword) {
             setPasswordError("Passwords do not match");
             return;
@@ -37,7 +63,6 @@ const AddUsers = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const token = localStorage.getItem('Authorization');
                     if (!token) {
                         alert('No token found. Please log in.');
                         return;
@@ -49,7 +74,6 @@ const AddUsers = () => {
                         }
                     });
 
-
                     Swal.fire({
                         icon: 'success',
                         title: 'Success',
@@ -59,12 +83,15 @@ const AddUsers = () => {
                     })
 
                 } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error.response.data.message,
+                    });
                     console.log(error.response.data);
                 }
             }
         });
-
-
     };
 
     const togglePasswordVisibility = () => {
@@ -102,24 +129,30 @@ const AddUsers = () => {
                                 Username:
                             </label>
                             <input
-                                className="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className={`shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${inputError.username && "border-red-500"
+                                    }`}
                                 type="text"
                                 id="username"
                                 value={formData.username}
                                 onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                                placeholder="Enter Your Username . . ."
                             />
+                            {inputError.username && <p className="text-red-500">Please enter a username.</p>}
                         </div>
                         <div>
                             <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
                                 Name:
                             </label>
                             <input
-                                className="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className={`shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${inputError.name && "border-red-500"
+                                    }`}
                                 type="text"
                                 id="name"
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                placeholder="Enter Your Name . . ."
                             />
+                            {inputError.name && <p className="text-red-500">Please enter your name.</p>}
                         </div>
                         <div>
                             <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
@@ -127,11 +160,13 @@ const AddUsers = () => {
                             </label>
                             <div className="relative">
                                 <input
-                                    className="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className={`shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${inputError.password && "border-red-500"
+                                        }`}
                                     type={showPassword ? "text" : "password"}
                                     id="password"
                                     value={formData.password}
                                     onChange={handlePasswordChange}
+                                    placeholder="Enter Your Password . . ."
                                 />
                                 <button
                                     type="button"
@@ -145,26 +180,31 @@ const AddUsers = () => {
                                     )}
                                 </button>
                             </div>
+                            {inputError.password && <p className="text-red-500">Password must be at least 8 characters long.</p>}
+                            {passwordError && <p className="text-red-500">{passwordError}</p>}
                         </div>
-                        {passwordError && <p className="text-red-500">{passwordError}</p>}
                         <div>
                             <label className="block text-gray-700 font-bold mb-2" htmlFor="retypePassword">
                                 Retype Password:
                             </label>
                             <input
-                                className="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className={`shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${inputError.retypePassword && "border-red-500"
+                                    }`}
                                 type="password"
                                 id="retypePassword"
                                 value={formData.retypePassword}
                                 onChange={handleRetypePasswordChange}
+                                placeholder="Please Retype Your Password . . ."
                             />
+                            {inputError.retypePassword && <p className="text-red-500">Passwords do not match.</p>}
                         </div>
                         <div>
                             <label className="block text-gray-700 font-bold mb-2" htmlFor="role">
                                 Role:
                             </label>
                             <select
-                                className="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className={`shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${inputError.role && "border-red-500"
+                                    }`}
                                 id="role"
                                 value={formData.role}
                                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
@@ -173,11 +213,12 @@ const AddUsers = () => {
                                 <option value="admin">Admin</option>
                                 <option value="member">Member</option>
                             </select>
+                            {inputError.role && <p className="text-red-500">Please select a role.</p>}
                         </div>
                     </div>
 
                     <div className="flex justify-end py-5">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                        <button className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
                             Add User
                         </button>
                     </div>
