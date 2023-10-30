@@ -38,7 +38,7 @@ function SideNavbar() {
 
     return (
         <aside className='fixed top-0 h-full z-50 p-2 px-7 flex flex-col overflow-y-auto bg-white border border-r-slate-300'>
-            <div onClick={handleLogout} className='py-2 px-4 text-md text-center rounded-md bg-red-500 text-white hover:bg-red-800 hover:shadow-md cursor-pointer'>
+            <div onClick={handleLogout} className='my-4 py-2 px-4 text-md text-center rounded-md bg-red-500 text-white hover:bg-red-800 hover:shadow-md cursor-pointer'>
                 <p>Logout</p>
             </div>
             <div className='flex flex-col gap-4'>

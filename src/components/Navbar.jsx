@@ -5,7 +5,7 @@ const Navbar = () => {
             <div className='container flex justify-between items-center mx-auto'>
                 <div className='flex items-center mx-auto'>
                     <p className='text-xl font-medium whitespace-nowrap'>
-                        PT Bitop
+                        PT. Bitop Jaya Lestari
                     </p>
                 </div>
             </div>
